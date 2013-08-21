@@ -1,0 +1,31 @@
+﻿@model IEnumerable<System.String>
+
+<section>
+
+    <dl>
+        <dt>VendorName</dt>
+        <dd>@ViewBag.VendorName [@ViewBag.VendorID]</dd>
+    </dl>
+
+    <h2>Import Excel Spreadsheet</h2>
+    <form action="/Excel/Worksheets" method="post" enctype="multipart/form-data">
+
+        <input hidden name="vendorID" value="@ViewBag.VendorID" />
+        <input hidden name="vendorName" value="@ViewBag.VendorName" />
+
+        <label>
+            Filename:
+            <input type="file" name="workbookFile" />
+        </label>
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Already Imported</h2>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@item</li>
+        }
+    </ul>
+
+</section>
