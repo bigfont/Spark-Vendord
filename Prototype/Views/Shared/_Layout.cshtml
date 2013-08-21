@@ -4,70 +4,33 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width" />
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/themes/base/css")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="~/Content/themes/base/jquery.dataTables_themeroller.css" rel="stylesheet" />
-    <link href="~/Content/themes/base/jquery.dataTables.css" rel="stylesheet" />
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/site")
 
-    @Scripts.Render("~/bundles/modernizr")
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="~/Scripts/html5shiv.js"></script>
+        <script src="~/Scripts/respond.js"></script>
+    <![endif]-->
+
 </head>
 <body>
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-            </div>
-            <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
-                <nav>
-                    <ul id="menu">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Vendors", "Index", "Vendor")</li>
-                        <li>@Html.ActionLink("Products", "Index", "Product")</li>
-                        <li>@Html.ActionLink("Excel", "Index", "Excel")</li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-    <div id="body">
-        @RenderSection("featured", required: false)
-        <section class="content-wrapper main-content clear-fix">
-            @RenderBody()
-        </section>
-    </div>
-    <footer>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-            </div>
-        </div>
-    </footer>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
+    @Html.Partial("_Navbar")
+  
+    @RenderSection("featured", false)
 
+    @RenderBody()
 
-
+    @Scripts.Render("~/js/jquery")
+    @Scripts.Render("~/js/modernizr")
+    @Scripts.Render("~/js/bootstrap")
 
     <script type="text/javascript">
 
-        $(document).ready(function () {
+    </script>
 
-            $('table').addClass('dataTable').dataTable();
-
-            $("button").click(function () {
-                $(this).parents("section").first().css("border", "1px solid black");
-            });
-
-        });
-
-    </script>    
-
-    @RenderSection("scripts", required: false)
 </body>
 </html>
