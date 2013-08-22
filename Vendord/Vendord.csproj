@@ -272,6 +272,8 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Code\BootstrapForms.cshtml" />
+    <None Include="Properties\PublishProfiles\vendord - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\vendord - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
