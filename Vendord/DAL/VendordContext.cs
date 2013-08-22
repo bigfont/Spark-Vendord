@@ -7,6 +7,7 @@ namespace Vendord.DAL
     public class VendordContext : DbContext
     {
         public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

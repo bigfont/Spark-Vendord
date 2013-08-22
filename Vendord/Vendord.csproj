@@ -183,6 +183,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="DAL\VendordContext.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -201,8 +202,21 @@
     <Compile Include="Migrations\201308220239460_vendorValidation2.Designer.cs">
       <DependentUpon>201308220239460_vendorValidation2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308221536404_vendorTimestamp.cs" />
+    <Compile Include="Migrations\201308221536404_vendorTimestamp.Designer.cs">
+      <DependentUpon>201308221536404_vendorTimestamp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201308221550105_productModel.cs" />
+    <Compile Include="Migrations\201308221550105_productModel.Designer.cs">
+      <DependentUpon>201308221550105_productModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201308221553190_seedProducts.cs" />
+    <Compile Include="Migrations\201308221553190_seedProducts.Designer.cs">
+      <DependentUpon>201308221553190_seedProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -292,7 +306,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -335,6 +351,11 @@
     <Content Include="Views\Vendor\Edit.cshtml" />
     <Content Include="Views\Vendor\Delete.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -351,6 +372,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308220239460_vendorValidation2.resx">
       <DependentUpon>201308220239460_vendorValidation2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308221536404_vendorTimestamp.resx">
+      <DependentUpon>201308221536404_vendorTimestamp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308221550105_productModel.resx">
+      <DependentUpon>201308221550105_productModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308221553190_seedProducts.resx">
+      <DependentUpon>201308221553190_seedProducts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

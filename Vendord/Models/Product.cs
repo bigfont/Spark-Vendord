@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Vendord.Models
 {
-    public class Vendor
+    public class Product
     {
         [Key]
         public int ID { get; set; }

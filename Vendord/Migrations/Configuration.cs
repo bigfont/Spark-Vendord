@@ -27,6 +27,15 @@ namespace Vendord.Migrations
                 new Vendor { Name = "Nature Doesn't Work" },
                 new Vendor { Name = "Carrots are Us" }
                 );
+
+            context.Products.AddOrUpdate(
+                p => p.Name,
+                new Product { Name = "Yams" },
+                new Product { Name = "Oranges" },
+                new Product { Name = "Apples" },
+                new Product { Name = "Grapefruits" },
+                new Product { Name = "Bananas" }
+                );
         }
     }
 }

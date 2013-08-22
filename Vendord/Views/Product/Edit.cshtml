@@ -1,4 +1,4 @@
-﻿@model Vendord.Models.Vendor
+﻿@model Vendord.Models.Product
 
 @{
     ViewBag.Title = "Edit";
@@ -12,7 +12,7 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Vendor</legend>
+        <legend>Product</legend>
 
         @Html.HiddenFor(model => model.ID)
         @Html.HiddenFor(model => model.TimeStamp)
