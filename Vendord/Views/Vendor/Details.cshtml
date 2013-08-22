@@ -1,0 +1,21 @@
+﻿@model Vendord.Models.Vendor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Vendor</legend>
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+    </dl>
+</fieldset>
+<div class="btn-group">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+</div>
