@@ -27,7 +27,11 @@ namespace Vendord.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Vendor vendor = db.Vendors.Find(id);
+            //Vendor vendor = db.Vendors.Find(id);
+            Vendor vendor = db.Vendors
+                .Include(v => v.VendorProducts)
+                .Where(v => v.ID == id)
+                .FirstOrDefault();
             if (vendor == null)
             {
                 return HttpNotFound();

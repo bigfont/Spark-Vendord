@@ -36,6 +36,10 @@ namespace Vendord.Migrations
                 new Product { Name = "Grapefruits" },
                 new Product { Name = "Bananas" }
                 );
+
+            context.VendorProducts.AddOrUpdate(
+                vp => new { vp.VendorID, vp.ProductID },
+                new VendorProduct { VendorID = 2, ProductID = 1 });
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Vendord.DAL
     {
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<VendorProduct> VendorProducts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

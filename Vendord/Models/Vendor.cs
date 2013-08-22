@@ -15,5 +15,8 @@ namespace Vendord.Models
         public string Name { get; set; }
         [Timestamp]
         public Byte[] TimeStamp { get; set; }
+
+        public virtual ICollection<VendorProduct> VendorProducts { get; set; }
+
     }
 }
