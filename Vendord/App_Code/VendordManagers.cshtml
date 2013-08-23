@@ -1,0 +1,12 @@
+﻿@using System.Linq.Expressions
+@using System.Web.Mvc
+
+@helper Intro(string entity)
+{
+    <p>These are all your <strong>@entity</strong>.</p>
+}
+
+@helper SnipLastLetter(string entity)
+{
+    @: @entity.Remove(entity.Length - 1)
+}

@@ -1,41 +1,39 @@
 ﻿@model Vendord.Models.Vendor
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Vendors";
 }
-
-<h2>Details</h2>
-
+<h2>Manage @ViewBag.Title</h2>
 <fieldset>
-    <legend>Vendor</legend>
+    <legend>@VendordManagers.SnipLastLetter(ViewBag.Title) Details</legend>
     <div class="btn-group">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("All Vendors", "Index", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Edit Vendor", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Delete Vendor", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
     </div>
-    <dl>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)</dt>
-        <dd>@Html.DisplayFor(model => model.Name)</dd>
-    </dl>
-
-
-</fieldset>
-
-<fieldset>
-    <legend>Vendor Products</legend>
-    <div class="list-group">
-
-        @foreach (var vp in Model.VendorProducts)
-        { 
-
-            <a href='@Url.Action("Details", "Product", new { id = vp.ProductID })' class="list-group-item">
-
-                @vp.Product.Name | @Html.DisplayFor(i => vp.UnitPrice)
-
-            </a>            
-
-        }
-
+    <hr />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                @Html.DisplayFor(model => model.Name)</h3>
+        </div>
+        <div class="panel-body">
+            <p><strong>@Html.DisplayFor(model => model.Name)</strong> sells the following products.</p>
+            <p>Click a product to see who else sells it.</p>
+        </div>
+        <div class="list-group">
+            @foreach (var vp in Model.VendorProducts)
+            {
+                var referrerID = Request.QueryString["referrerID"];
+                string cssClass = " ";
+                if (referrerID != null && Convert.ToInt32(referrerID) == vp.ProductID)
+                {
+                    cssClass += "referrer";
+                }
+                <a href='@Url.Action("Details", "Product", new { id = vp.ProductID, referrerID = vp.VendorID })' class="list-group-item @cssClass">
+                    @vp.Product.Name | @Html.DisplayFor(i => vp.UnitPrice)
+                </a>            
+            }
+        </div>
     </div>
 </fieldset>

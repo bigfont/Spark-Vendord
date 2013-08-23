@@ -19,7 +19,10 @@ namespace Vendord.Controllers
 
         public ActionResult Index()
         {
-            var vendorproducts = db.VendorProducts.Include(v => v.Vendor).Include(v => v.Product);
+            var vendorproducts = db.VendorProducts
+                .Include(vp => vp.Vendor)
+                .Include(vp => vp.Product)
+                .OrderBy(vp => vp.Vendor.Name);
             return View(vendorproducts.ToList());
         }
 
@@ -41,9 +44,9 @@ namespace Vendord.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.VendorID = new SelectList(db.Vendors, "ID", "Name");
-            ViewBag.ProductID = new SelectList(db.Products, "ID", "Name");
-            return View();
+            ViewBag.VendorID = new SelectList(db.Vendors.OrderBy(v => v.Name), "ID", "Name");
+            ViewBag.ProductID = new SelectList(db.Products.OrderBy(p => p.Name), "ID", "Name");
+            return View(new VendorProductCreateViewModel());
         }
 
         //
@@ -51,18 +54,24 @@ namespace Vendord.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(VendorProduct vendorproduct)
+        public ActionResult Create(VendorProductCreateViewModel vendorProductCreateViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.VendorProducts.Add(vendorproduct);
+                VendorProduct vp = new VendorProduct { 
+                    VendorID = vendorProductCreateViewModel.VendorID,
+                    ProductID = vendorProductCreateViewModel.ProductID,
+                    UnitPrice = vendorProductCreateViewModel.UnitPrice
+                };
+
+                db.VendorProducts.Add(vp);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.VendorID = new SelectList(db.Vendors, "ID", "Name", vendorproduct.VendorID);
-            ViewBag.ProductID = new SelectList(db.Products, "ID", "Name", vendorproduct.ProductID);
-            return View(vendorproduct);
+            PopulateViewBagWithVendorIDandProductIDSelectLists(vendorProductCreateViewModel);
+
+            return View(vendorProductCreateViewModel);
         }
 
         //
@@ -75,10 +84,51 @@ namespace Vendord.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.VendorID = new SelectList(db.Vendors, "ID", "Name", vendorproduct.VendorID);
-            ViewBag.ProductID = new SelectList(db.Products, "ID", "Name", vendorproduct.ProductID);
+
+            PopulateViewBagWithVendorIDandProductIDSelectLists(vendorproduct);
+
+            // return view
             return View(vendorproduct);
         }
+
+        #region RefractorMe
+        
+        private void PopulateViewBagWithVendorIDandProductIDSelectLists(VendorProductCreateViewModel vendorProductCreateViewModel)
+        {
+            VendorProduct vendorProduct = new VendorProduct { 
+                VendorID = vendorProductCreateViewModel.VendorID,
+                ProductID = vendorProductCreateViewModel.ProductID
+            };
+            PopulateViewBagWithVendorIDandProductIDSelectLists(vendorProduct);
+        }
+        private void PopulateViewBagWithVendorIDandProductIDSelectLists(VendorProduct vendorproduct)
+        {
+            // vendors
+            IList<Vendor> vendors = db.Vendors.ToList();
+            IEnumerable<SelectListItem> selectList_Vendors =
+                from v in vendors
+                select new SelectListItem
+                {
+                    Selected = (v.ID == vendorproduct.VendorID),
+                    Text = v.Name,
+                    Value = v.ID.ToString()
+                };
+            ViewBag.VendorID = selectList_Vendors;
+
+            // products
+            IList<Product> products = db.Products.ToList();
+            IEnumerable<SelectListItem> selectList_Products =
+                from p in products
+                select new SelectListItem
+                {
+                    Selected = (p.ID == vendorproduct.ProductID),
+                    Text = p.Name,
+                    Value = p.ID.ToString()
+                };
+            ViewBag.ProductID = selectList_Products;
+        }
+
+        #endregion
 
         //
         // POST: /VendorProduct/Edit/5
@@ -90,6 +140,9 @@ namespace Vendord.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(vendorproduct).State = EntityState.Modified;
+                // {"Violation of UNIQUE KEY constraint 'UQ_VendorProducts_VendorID_ProductID'. 
+                // Cannot insert duplicate key in object 'dbo.VendorProducts'. 
+                // The duplicate key value is (2, 2).\r\nThe statement has been terminated."}
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

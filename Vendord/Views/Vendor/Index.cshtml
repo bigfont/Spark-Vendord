@@ -1,19 +1,31 @@
 ﻿@model IEnumerable<Vendord.Models.Vendor>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Vendors";
 }
 
-<h2>Vendors</h2>
+<h2>Manage @ViewBag.Title</h2>
+<fieldset>
+    <legend>All @ViewBag.Title</legend>
+    <div class="btn-group">
+        @Html.ActionLink("Back Home", "Index", new { Controller = "Home" }, new { @class = "btn btn-primary" })
+        @Html.ActionLink(String.Format("Create New {0}", ViewBag.Title as String), "Create", null, new { @class = "btn btn-default" })
+    </div>
+    <hr />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">All @ViewBag.Title</h3>
+        </div>
+        <div class="panel-body">
+            @VendordManagers.Intro(ViewBag.Title)
+            <p>Click a @VendordManagers.SnipLastLetter(ViewBag.Title) to view its products.</p>
+        </div>
+        <div class="list-group">
+            @foreach (var item in Model)
+            {                
+                @Html.ActionLink(item.Name, "Details", new { id = item.ID }, new { @class = "list-group-item" })
+            }
+        </div>
 
-<div class="btn-group">
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Back Home", "Index", new { Controller = "Home" }, new { @class = "btn btn-default" })
-</div>
-<hr />
-<div class="list-group">
-    @foreach (var item in Model)
-    {                
-        @Html.ActionLink(item.Name, "Details", new { id = item.ID }, new { @class = "list-group-item" })
-    }
-</div>
+    </div>
+</fieldset>

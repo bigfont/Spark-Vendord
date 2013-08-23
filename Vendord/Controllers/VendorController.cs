@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Vendord.Models;
 using Vendord.DAL;
+using System.Data.Entity.Infrastructure;
 
 namespace Vendord.Controllers
 {
@@ -19,7 +20,7 @@ namespace Vendord.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Vendors.ToList());
+            return View(db.Vendors.ToList().OrderBy(v => v.Name));
         }
 
         //
@@ -27,7 +28,13 @@ namespace Vendord.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Vendor vendor = db.Vendors.Find(id);
+            Vendor vendor = db.Vendors
+                .Include(v => v.VendorProducts.Select(vp => vp.Product))
+                .Where(v => v.ID == id)
+                .FirstOrDefault();
+
+            vendor.VendorProducts = vendor.VendorProducts.OrderBy(vp => vp.Product.Name).ToList();
+
             if (vendor == null)
             {
                 return HttpNotFound();
@@ -48,18 +55,21 @@ namespace Vendord.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Vendor vendor)
+        public ActionResult Create(VendorCreateViewModel vendorCreateViewModel)
         {
-            // TODO Add validation for UNQIQUEness in the database.
-
             if (ModelState.IsValid)
             {
-                db.Vendors.Add(vendor);
+                Vendor v = new Vendor
+                {
+                    Name = vendorCreateViewModel.Name
+                };
+
+                db.Vendors.Add(v);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(vendor);
+            return View(vendorCreateViewModel);
         }
 
         //

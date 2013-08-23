@@ -26,10 +26,18 @@ namespace Vendord.Migrations
                 new Vendor { Name = "BigFont Farms" },
                 new Vendor { Name = "BigFont Vineyards" },
                 new Vendor { Name = "Nature Doesn't Work" },
-                new Vendor { Name = "Carrots are Us" }
+                new Vendor { Name = "Carrots are Us" },
+                new Vendor { Name = "We Love Lettuce" }
             };
 
-            vendors.ForEach(v => context.Vendors.AddOrUpdate(cols => cols.Name, v));
+            foreach (Vendor v in vendors)
+            {
+                var exists = context.Vendors.Where(p => p.Name == v.Name).FirstOrDefault();
+                if (exists == null)
+                {
+                    context.Vendors.Add(v);
+                }
+            }
             context.SaveChanges();
 
             var products = new List<Product>
@@ -41,27 +49,35 @@ namespace Vendord.Migrations
                 new Product { Name = "Bananas" }
             };
 
-            products.ForEach(p => context.Products.AddOrUpdate(cols => cols.Name, p));
+            foreach (Product p in products)
+            {
+                var exists = context.Products.Where(pred => pred.Name == p.Name).FirstOrDefault();
+                if (exists == null)
+                {
+                    context.Products.Add(p);
+                }
+            }
             context.SaveChanges();
 
             var vendorProducts = new List<VendorProduct>();
             decimal unitPrice = 1.00m;
 
+            vendors = context.Vendors.ToList();
+            products = context.Products.ToList();
+
             foreach (Vendor v in vendors)
             {
                 foreach (Product p in products)
                 {
-                    vendorProducts.Add(new VendorProduct
+                    var exists = context.VendorProducts.Where(pred => pred.ProductID == p.ID && pred.VendorID == v.ID).FirstOrDefault();
+                    if (exists == null)
                     {
-                        VendorID = v.ID,
-                        ProductID = p.ID,
-                        UnitPrice = unitPrice
-                    });
+                        context.VendorProducts.Add(new VendorProduct { VendorID = v.ID, ProductID = p.ID, UnitPrice = unitPrice });
+                    }
                     unitPrice += 0.25m;
                 }
             }
 
-            vendorProducts.ForEach(vp => context.VendorProducts.AddOrUpdate(cols => new { cols.VendorID, cols.ProductID }, vp));
             context.SaveChanges();
 
         }

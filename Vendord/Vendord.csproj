@@ -304,6 +304,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="App_Code\BootstrapForms.cshtml" />
+    <Content Include="App_Code\VendordManagers.cshtml" />
     <None Include="Properties\PublishProfiles\vendord - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\vendord - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
@@ -380,6 +381,7 @@
     <Content Include="Views\VendorProduct\Edit.cshtml" />
     <Content Include="Views\VendorProduct\Delete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,20 +1,22 @@
-﻿@model System.Decimal?
+﻿@model System.String
 
 @{
-    var value = Model != null ? 
-        Model.Value.ToString("F") : 
+    var value = Model != null ?
+        Model.ToString() :
         String.Empty;
     }
 
-<input 
-    class="form-control" 
+<input
+    class="form-control"
+
     @foreach (var pair in Html.GetUnobtrusiveValidationAttributes("", ViewData.ModelMetadata))
     {
         @: @(pair.Key)="@(pair.Value)"
     }
+
+    type="text"
+    value="@value"
+    placeholder="@ViewData.ModelMetadata.Watermark"
     id="@ViewData.ModelMetadata.PropertyName"
     name="@ViewData.ModelMetadata.PropertyName"
-    placeholder="@ViewData.ModelMetadata.Watermark"
-    type="text"
-    value="@value" />
-
+    type="text" />

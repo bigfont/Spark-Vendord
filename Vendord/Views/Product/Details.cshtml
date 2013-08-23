@@ -3,31 +3,40 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
+<h2>Manage Products</h2>
 <fieldset>
-    <legend>Product</legend>
+    <legend>Product Details</legend>
     <div class="btn-group">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("All Products", "Index", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Edit Product", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Delete Product", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
     </div>
-    <dl>
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)</dt>
-        <dd>@Html.DisplayFor(model => model.Name)</dd>
-    </dl>
+    <hr />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                @Html.DisplayFor(model => model.Name)</h3>
+        </div>
+        <div class="panel-body">
+            <p>The following vendors sell <strong>@Html.DisplayFor(model => model.Name)</strong>.</p>
+            <p>Click on a vendor to see its products.</p>
+        </div>
+        <div class="list-group">
+            @foreach (var vp in Model.VendorProducts)
+            {
+                var referrerID = Request.QueryString["referrerID"];
+                string cssClass = " ";
+                if (referrerID != null && Convert.ToInt32(referrerID) == vp.VendorID)
+                {
+                    cssClass += "referrer";                    
+                }
+                @Html.ActionLink(vp.Vendor.Name, 
+                    "Details", 
+                    new { Controller = "Vendor", id = vp.VendorID, referrerID = vp.ProductID }, 
+                    new { @class = ("list-group-item" + cssClass) })
+            }
+        </div>
+    </div>
 </fieldset>
 
-<fieldset>
-    <legend>Product Vendors</legend>
-    <div class="list-group">
 
-        @foreach (var vp in Model.VendorProducts)
-        { 
-            @Html.ActionLink(vp.Vendor.Name, "Details", new { Controller = "Vendor", id = vp.VendorID }, new { @class = "list-group-item" })
-        }
-
-    </div>
-</fieldset>

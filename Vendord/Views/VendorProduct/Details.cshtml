@@ -1,38 +1,29 @@
 ﻿@model Vendord.Models.VendorProduct
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Vendor Products";
 }
 
-<h2>Details</h2>
+<h2>Manage @ViewBag.Title</h2>
 
 <fieldset>
-    <legend>Vendor Product</legend>
+    <legend>@VendordManagers.SnipLastLetter(ViewBag.Title) Details</legend>
     <div class="btn-group">
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
-        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        @Html.ActionLink(String.Format("All {0}", ViewBag.Title as String), "Index", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink(String.Format("Edit {0}", VendordManagers.SnipLastLetter(ViewBag.Title as String)), "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
+        @Html.ActionLink(String.Format("Delete {0}", VendordManagers.SnipLastLetter(ViewBag.Title as String)), "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
     </div>
-    <dl>
-        <dt>
-            @Html.DisplayNameFor(model => model.Vendor.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Vendor.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.Name)
-        </dt>
-        <dd class="display-field">
-            @Html.DisplayFor(model => model.Product.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UnitPrice)
-        </dd>
+    <hr />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                @Html.DisplayFor(model => model.Vendor.Name) - @Html.DisplayFor(model => Model.Product.Name)</h3>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                @Html.DisplayNameFor(model => model.UnitPrice)
+                @Html.DisplayFor(model => model.UnitPrice)
+            </li>
+        </ul>
     </dl>
 </fieldset>

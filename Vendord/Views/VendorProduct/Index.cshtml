@@ -1,31 +1,38 @@
 ﻿@model IEnumerable<Vendord.Models.VendorProduct>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Vendor Products";
 }
 
-<h2>Vendor Products</h2>
+<h2>Manage @ViewBag.Title</h2>
+<fieldset>
+    <legend>All @ViewBag.Title</legend>
+    <div class="btn-group">
+        @Html.ActionLink("Back Home", "Index", new { Controller = "Home" }, new { @class = "btn btn-primary" })
+        @Html.ActionLink(String.Format("Create New {0}", VendordManagers.SnipLastLetter(ViewBag.Title as String)), "Create", null, new { @class = "btn btn-default" })
+    </div>
 
-<div class="btn-group">
+    <hr />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">All @ViewBag.Title</h3>
+        </div>
+        <div class="panel-body">
+            @VendordManagers.Intro(ViewBag.Title)
+            <p>Click a @VendordManagers.SnipLastLetter(ViewBag.Title) to view its details.</p>
+        </div>
+        <div class="list-group">
 
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Back Home", "Index", new { Controller = "Home" }, new { @class = "btn btn-default" })
+            @foreach (var item in Model)
+            {
+                <a href="@Url.Action("Details", "VendorProduct", new { id = item.ID })" class="list-group-item">
+                    @Html.DisplayFor(i => item.Vendor.Name) | @Html.DisplayFor(i => item.Product.Name) | @Html.DisplayFor(i => item.UnitPrice)
+                </a>
+            }
+        </div>
+    </div>
 
-
-</div>
-
-<hr />
-
-<div class="list-group">
-
-    @foreach (var item in Model)
-    {
-        <a href="@Url.Action("Details", "VendorProduct", new { id = item.ID })" class="list-group-item">
-            @Html.DisplayFor(i => item.Vendor.Name) | @Html.DisplayFor(i => item.Product.Name) | @Html.DisplayFor(i => item.UnitPrice)
-        </a>
-    }
-</div>
-
+</fieldset>
 @*            
 
         @Html.ActionLink("Edit", "Edit", new { id = item.ID })

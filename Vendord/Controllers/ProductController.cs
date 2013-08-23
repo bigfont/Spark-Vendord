@@ -19,7 +19,7 @@ namespace Vendord.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            return View(db.Products.ToList().OrderBy(p => p.Name));
         }
 
         //
@@ -27,7 +27,13 @@ namespace Vendord.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Product product = db.Products.Find(id);
+            Product product = db.Products
+                .Include(p => p.VendorProducts.Select(vp => vp.Vendor))
+                .Where(p => p.ID == id)
+                .FirstOrDefault();
+
+            product.VendorProducts = product.VendorProducts.OrderBy(vp => vp.Vendor.Name).ToList();
+
             if (product == null)
             {
                 return HttpNotFound();
@@ -48,16 +54,20 @@ namespace Vendord.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product)
+        public ActionResult Create(ProductCreateViewModel productCreateViewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                Product p = new Product { 
+                    Name = productCreateViewModel.Name
+                };
+
+                db.Products.Add(p);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            return View(productCreateViewModel);
         }
 
         //
