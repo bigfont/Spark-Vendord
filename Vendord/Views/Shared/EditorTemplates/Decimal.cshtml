@@ -1,0 +1,19 @@
+﻿@model System.Decimal?
+
+@{
+    var value = Model != null ? 
+        String.Format(ViewData.ModelMetadata.DisplayFormatString, Model.Value) : 
+        String.Empty;
+    }
+
+<input 
+    class="form-control" 
+    @foreach (var pair in Html.GetUnobtrusiveValidationAttributes("", ViewData.ModelMetadata))
+    {
+        @: @(pair.Key)="@(pair.Value)"
+    }
+    id="@ViewData.ModelMetadata.PropertyName"
+    name="@ViewData.ModelMetadata.PropertyName"
+    type="text"
+    value="@value" />
+

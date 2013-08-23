@@ -1,4 +1,4 @@
-﻿@model Vendord.Models.Vendor
+﻿@model Vendord.Models.VendorProduct
 
 @{
     ViewBag.Title = "Delete";
@@ -8,11 +8,14 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
-    <legend>Vendor</legend>
+    <legend>Vendor Product</legend>
     <dl>
         <dt>
-            @Html.DisplayNameFor(model => model.Name)</dt>
-        <dd>@Html.DisplayFor(model => model.Name)</dd>
+            @Html.DisplayNameFor(model => model.Vendor.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Vendor.Name)</dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Product.Name)</dd>
     </dl>
 
 </fieldset>

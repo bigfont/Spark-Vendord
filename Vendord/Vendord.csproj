@@ -185,6 +185,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
+    <Compile Include="Controllers\VendorProductController.cs" />
     <Compile Include="DAL\VendordContext.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -221,6 +222,14 @@
     <Compile Include="Migrations\201308221731211_vendorProductSeed1.cs" />
     <Compile Include="Migrations\201308221731211_vendorProductSeed1.Designer.cs">
       <DependentUpon>201308221731211_vendorProductSeed1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201308221830008_vendorProductUnitPrice.cs" />
+    <Compile Include="Migrations\201308221830008_vendorProductUnitPrice.Designer.cs">
+      <DependentUpon>201308221830008_vendorProductUnitPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201308230346023_uniqueValidation.cs" />
+    <Compile Include="Migrations\201308230346023_uniqueValidation.Designer.cs">
+      <DependentUpon>201308230346023_uniqueValidation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -365,9 +374,16 @@
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\VendorProduct\Index.cshtml" />
+    <Content Include="Views\VendorProduct\Details.cshtml" />
+    <Content Include="Views\VendorProduct\Create.cshtml" />
+    <Content Include="Views\VendorProduct\Edit.cshtml" />
+    <Content Include="Views\VendorProduct\Delete.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -396,6 +412,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308221731211_vendorProductSeed1.resx">
       <DependentUpon>201308221731211_vendorProductSeed1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308221830008_vendorProductUnitPrice.resx">
+      <DependentUpon>201308221830008_vendorProductUnitPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308230346023_uniqueValidation.resx">
+      <DependentUpon>201308230346023_uniqueValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

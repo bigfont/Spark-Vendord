@@ -1,0 +1,44 @@
+﻿@model Vendord.Models.VendorProduct
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Vendor Product</legend>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VendorID, "Vendor")
+            @Html.DropDownList("VendorID", ViewBag.VendorID as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.VendorID)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductID, "Product")
+            @Html.DropDownList("ProductID", ViewBag.ProductID as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ProductID)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UnitPrice)
+            @Html.EditorFor(model => model.UnitPrice)
+            @Html.ValidationMessageFor(model => model.UnitPrice)
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-default">Create</button>
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

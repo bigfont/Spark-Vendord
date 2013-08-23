@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Vendord.Models.VendorProduct>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Vendor Products</h2>
+
+<div class="btn-group">
+
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back Home", "Index", new { Controller = "Home" }, new { @class = "btn btn-default" })
+
+
+</div>
+
+<hr />
+
+<div class="list-group">
+
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("Details", "VendorProduct", new { id = item.ID })" class="list-group-item">
+            @Html.DisplayFor(i => item.Vendor.Name) | @Html.DisplayFor(i => item.Product.Name) | @Html.DisplayFor(i => item.UnitPrice)
+        </a>
+    }
+</div>
+
+@*            
+
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+
+*@

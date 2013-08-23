@@ -12,6 +12,7 @@ namespace Vendord.Models
         public int ID { get; set; }
         [Required]
         [StringLength(100)]
+        [Display(Name="Product Name")]
         public string Name { get; set; }
         [Timestamp]
         public Byte[] TimeStamp { get; set; }

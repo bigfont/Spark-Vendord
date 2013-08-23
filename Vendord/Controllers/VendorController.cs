@@ -27,11 +27,7 @@ namespace Vendord.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            //Vendor vendor = db.Vendors.Find(id);
-            Vendor vendor = db.Vendors
-                .Include(v => v.VendorProducts)
-                .Where(v => v.ID == id)
-                .FirstOrDefault();
+            Vendor vendor = db.Vendors.Find(id);
             if (vendor == null)
             {
                 return HttpNotFound();
@@ -54,6 +50,8 @@ namespace Vendord.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Vendor vendor)
         {
+            // TODO Add validation for UNQIQUEness in the database.
+
             if (ModelState.IsValid)
             {
                 db.Vendors.Add(vendor);

@@ -9,13 +9,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Vendord</a>
+        <a class="navbar-brand" href="/">Vendord</a>
     </div>
 
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
             <li>@Html.ActionLink("Manage Vendors", "Index", new { Controller = "Vendor" }, null)</li>
             <li>@Html.ActionLink("Manage Products", "Index", new { Controller = "Product" }, null)</li>
+            <li>@Html.ActionLink("Manage Vendor Products", "Index", new { Controller = "VendorProduct" }, null)</li>
 
         </ul>
     </div>

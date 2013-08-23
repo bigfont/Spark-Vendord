@@ -1,6 +1,7 @@
 namespace Vendord.Migrations
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -20,26 +21,49 @@ namespace Vendord.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
 
-            context.Vendors.AddOrUpdate(
-                v => v.Name,
+            var vendors = new List<Vendor>
+            {
                 new Vendor { Name = "BigFont Farms" },
                 new Vendor { Name = "BigFont Vineyards" },
                 new Vendor { Name = "Nature Doesn't Work" },
                 new Vendor { Name = "Carrots are Us" }
-                );
+            };
 
-            context.Products.AddOrUpdate(
-                p => p.Name,
+            vendors.ForEach(v => context.Vendors.AddOrUpdate(cols => cols.Name, v));
+            context.SaveChanges();
+
+            var products = new List<Product>
+            {
                 new Product { Name = "Yams" },
                 new Product { Name = "Oranges" },
                 new Product { Name = "Apples" },
                 new Product { Name = "Grapefruits" },
                 new Product { Name = "Bananas" }
-                );
+            };
 
-            context.VendorProducts.AddOrUpdate(
-                vp => new { vp.VendorID, vp.ProductID },
-                new VendorProduct { VendorID = 2, ProductID = 1 });
+            products.ForEach(p => context.Products.AddOrUpdate(cols => cols.Name, p));
+            context.SaveChanges();
+
+            var vendorProducts = new List<VendorProduct>();
+            decimal unitPrice = 1.00m;
+
+            foreach (Vendor v in vendors)
+            {
+                foreach (Product p in products)
+                {
+                    vendorProducts.Add(new VendorProduct
+                    {
+                        VendorID = v.ID,
+                        ProductID = p.ID,
+                        UnitPrice = unitPrice
+                    });
+                    unitPrice += 0.25m;
+                }
+            }
+
+            vendorProducts.ForEach(vp => context.VendorProducts.AddOrUpdate(cols => new { cols.VendorID, cols.ProductID }, vp));
+            context.SaveChanges();
+
         }
     }
 }

@@ -7,15 +7,27 @@
 <h2>Details</h2>
 
 <fieldset>
-    <legend>Vendor</legend>
+    <legend>Product</legend>
+    <div class="btn-group">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+    </div>
     <dl>
         <dt>
             @Html.DisplayNameFor(model => model.Name)</dt>
         <dd>@Html.DisplayFor(model => model.Name)</dd>
     </dl>
 </fieldset>
-<div class="btn-group">
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Delete", "Delete", new { id = Model.ID }, new { @class = "btn btn-default" })
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
-</div>
+
+<fieldset>
+    <legend>Product Vendors</legend>
+    <div class="list-group">
+
+        @foreach (var vp in Model.VendorProducts)
+        { 
+            @Html.ActionLink(vp.Vendor.Name, "Details", new { Controller = "Vendor", id = vp.VendorID }, new { @class = "list-group-item" })
+        }
+
+    </div>
+</fieldset>
