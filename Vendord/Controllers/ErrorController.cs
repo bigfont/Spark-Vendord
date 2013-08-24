@@ -6,25 +6,24 @@ using System.Web.Mvc;
 
 namespace Vendord.Controllers
 {
-    public class HomeController : Controller
-    {
+    public class ErrorController : Controller
+    {                
+        // error/index
         public ActionResult Index()
         {
             return View();
         }
 
-        #region Custom Errors
-
-        public ViewResult Trouble()
+        // shared/error
+        public ActionResult Error()
         {
-            return View("Error");
+            return View();
         }
 
-        public ViewResult Confused()
+        // error/notfound
+        public ActionResult NotFound()
         {
-            return View("Error");
+            return View();
         }
-
-        #endregion
     }
 }

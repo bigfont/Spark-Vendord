@@ -17,7 +17,13 @@
             <li>@Html.ActionLink("Manage Vendors", "Index", new { Controller = "Vendor" }, null)</li>
             <li>@Html.ActionLink("Manage Products", "Index", new { Controller = "Product" }, null)</li>
             <li>@Html.ActionLink("Manage Vendor Products", "Index", new { Controller = "VendorProduct" }, null)</li>
-            <li><a href="/elmah">Error Log</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Backstage<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/404-test">404 Test</a></li>
+                    <li><a href="/elmah">Error Log</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>
