@@ -13,6 +13,8 @@ namespace Vendord.Models
         public int ID { get; set; }
         [Timestamp]
         public Byte[] TimeStamp { get; set; }
+        [Required]
+        [StringLength(100)]
         public string Name { get; set; }
 
         public virtual ICollection<VendorProduct> VendorProducts { get; set; }

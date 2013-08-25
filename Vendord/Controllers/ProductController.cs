@@ -60,7 +60,6 @@ namespace Vendord.Controllers
         {
             if (ModelState.IsValid)
             {
-                Mapper.CreateMap<ProductCreateViewModel, Product>();
                 Product p = Mapper.Map<Product>(productCreateViewModel);
 
                 db.Products.Add(p);

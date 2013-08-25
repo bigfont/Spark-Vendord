@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Vendord.App_Start;
 
 namespace Vendord
 {
@@ -18,6 +19,7 @@ namespace Vendord
         {
             AreaRegistration.RegisterAllAreas();
 
+            AutoMapperConfig.RegisterMaps();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
