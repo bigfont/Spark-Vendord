@@ -9,6 +9,7 @@ namespace Vendord.ViewModels
     {
         [Required]
         [StringLength(100)]
+        // view model only data annotations
         [Display(Name = "Product Name", Prompt = "Type the product name here.")]
         public string Name { get; set; }
 

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Vendord.Models;
 using Vendord.DAL;
+using Vendord.ViewModels;
 
 namespace Vendord.Controllers
 {
