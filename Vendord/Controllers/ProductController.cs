@@ -6,7 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Vendord.Models;
+using Vendord.ViewModels;
 using Vendord.DAL;
+using AutoMapper;
 
 namespace Vendord.Controllers
 {
@@ -58,9 +60,8 @@ namespace Vendord.Controllers
         {
             if (ModelState.IsValid)
             {
-                Product p = new Product { 
-                    Name = productCreateViewModel.Name
-                };
+                Mapper.CreateMap<ProductCreateViewModel, Product>();
+                Product p = Mapper.Map<Product>(productCreateViewModel);
 
                 db.Products.Add(p);
                 db.SaveChanges();
