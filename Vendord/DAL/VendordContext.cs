@@ -13,6 +13,7 @@ namespace Vendord.DAL
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<VendorProduct> VendorProducts { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -58,7 +59,7 @@ namespace Vendord.DAL
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
                 entity.Property(e => e.Timestamp).IsRowVersion();
                 entity.HasRequired(e => e.Vendor);
-                entity.HasRequired(e => e.Product);                
+                entity.HasRequired(e => e.Product);
             }
         }
 

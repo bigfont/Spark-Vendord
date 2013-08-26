@@ -1,0 +1,35 @@
+﻿@model Vendord.Models.RegisterModel
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Register", "Account", new { returnUrl = @ViewBag.ReturnUrl, referringView = @ViewBag.ReferringView }, FormMethod.Post, new { id = "register", name = "register" }))
+        {
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend>Register for a Vendord account.</legend>
+                <div class="form-group">
+                    @Html.EditorFor(m => m.RegisterUserName)
+                    @Html.ValidationMessageFor(m => m.RegisterUserName)
+                </div>
+                <div class="form-group">
+                    @Html.EditorFor(m => m.RegisterPassword)
+                    @Html.ValidationMessageFor(m => m.RegisterPassword)
+                </div>
+                <div class="form-group">
+                    @Html.EditorFor(m => m.RegisterConfirmPassword)
+                    @Html.ValidationMessageFor(m => m.RegisterConfirmPassword)
+                </div>
+                <div class="btn-group">
+                    <button type="submit" form="register" class="btn btn-warning">Register</button>
+                    <button type="reset" form="register" class="btn btn-default">Reset</button>
+                </div>
+            </fieldset>
+        }
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

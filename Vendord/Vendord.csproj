@@ -250,6 +250,10 @@
     <Compile Include="Migrations\201308250237555_vendorProductViewFluent.Designer.cs">
       <DependentUpon>201308250237555_vendorProductViewFluent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201308260210503_addUserProfileTable.cs" />
+    <Compile Include="Migrations\201308260210503_addUserProfileTable.Designer.cs">
+      <DependentUpon>201308260210503_addUserProfileTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Product.cs" />
@@ -376,9 +380,7 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -404,6 +406,9 @@
     <Content Include="Views\VendorProduct\Delete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Shared\_Register.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -447,6 +452,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201308250237555_vendorProductViewFluent.resx">
       <DependentUpon>201308250237555_vendorProductViewFluent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201308260210503_addUserProfileTable.resx">
+      <DependentUpon>201308260210503_addUserProfileTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

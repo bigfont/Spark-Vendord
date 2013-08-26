@@ -8,17 +8,8 @@ using System.Web.Security;
 
 namespace Vendord.Models
 {
-    public class UsersContext : DbContext
-    {
-        public UsersContext()
-            : base("DefaultConnection")
-        {
-        }
+    #region Domain Model (We Assume)
 
-        public DbSet<UserProfile> UserProfiles { get; set; }
-    }
-
-    [Table("UserProfile")]
     public class UserProfile
     {
         [Key]
@@ -26,6 +17,10 @@ namespace Vendord.Models
         public int UserId { get; set; }
         public string UserName { get; set; }
     }
+
+    #endregion
+
+    #region View Models (We Assume)
 
     public class RegisterExternalLoginModel
     {
@@ -58,13 +53,13 @@ namespace Vendord.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "User name", Prompt = "Username")]
+        public string LoginUserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        [Display(Name = "Password", Prompt = "Password")]
+        public string LoginPassword { get; set; }
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
@@ -73,19 +68,20 @@ namespace Vendord.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "Username", Prompt = "Username")]
+        public string RegisterUserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        [Display(Name = "Password", Prompt = "Password")]
+        public string RegisterPassword { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        [Display(Name = "Confirm password", Prompt = "Confirm password")]
+        [Compare("RegisterPassword", ErrorMessage = "The password and confirmation password do not match.")]
+        public string RegisterConfirmPassword { get; set; }
     }
 
     public class ExternalLogin
@@ -94,4 +90,6 @@ namespace Vendord.Models
         public string ProviderDisplayName { get; set; }
         public string ProviderUserId { get; set; }
     }
+
+    #endregion
 }
